@@ -1,0 +1,319 @@
+/* ==========================================================================
+   APLECS - ESTILS PREMIUM CSS
+   Disseny modern, dinàmic i adaptatiu (glassmorphism, transicions i micro-animacions)
+   ========================================================================== */
+
+/* Importació de Google Fonts (Outfit & Inter) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --font-title: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Sistema de Colors HSL Curat */
+  --bg-primary: #f8fafc;
+  --bg-surface: rgba(255, 255, 255, 0.8);
+  --bg-card: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  
+  --primary: 258, 90%, 66%;       /* Violeta */
+  --primary-hover: 258, 90%, 58%;
+  --secondary: 199, 89%, 48%;     /* Blau Cel / Teal */
+  --secondary-hover: 199, 89%, 40%;
+  
+  --color-high: 142, 72%, 29%;    /* Rendiment Alt: Verd */
+  --bg-high: 142, 76%, 95%;
+  --color-med: 37, 98%, 35%;     /* Rendiment Mitjà: Taronja */
+  --bg-med: 37, 98%, 95%;
+  --color-low: 350, 89%, 43%;     /* Rendiment Baix: Vermell */
+  --bg-low: 350, 89%, 96%;
+
+  --border-glass: rgba(226, 232, 240, 0.8);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+/* Mode Fosc Actiu per Defecte o mitjançant selector .dark */
+body.dark-mode {
+  --bg-primary: #090d16;
+  --bg-surface: rgba(15, 23, 42, 0.7);
+  --bg-card: #131b2e;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  
+  --primary: 258, 80%, 72%;
+  --primary-hover: 258, 80%, 65%;
+  
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  --bg-high: 142, 70%, 12%;
+  --color-high: 142, 80%, 70%;
+  --bg-med: 37, 70%, 12%;
+  --color-med: 37, 90%, 70%;
+  --bg-low: 350, 70%, 14%;
+  --color-low: 350, 90%, 72%;
+}
+
+/* Configuració Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Fons amb gradients dinàmics decoratius */
+.gradient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gradient-orb-1 {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(99, 102, 241, 0.02) 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 20s infinite alternate;
+}
+
+.gradient-orb-2 {
+  position: absolute;
+  bottom: -10%;
+  left: -5%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(59, 130, 246, 0.02) 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 25s infinite alternate-reverse;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) scale(1); }
+  100% { transform: translateY(30px) scale(1.1); }
+}
+
+/* Tipografia */
+h1, h2, h3, h4 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Efecte de Vidre Esmerilat (Glassmorphism) */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-glass);
+  border-radius: 1.25rem;
+}
+
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+}
+
+/* Estils de les Badges de Nivell */
+.badge-alt {
+  background-color: hsl(var(--bg-high));
+  color: hsl(var(--color-high));
+  border: 1px solid hsla(var(--color-high), 0.2);
+}
+.badge-mitja {
+  background-color: hsl(var(--bg-med));
+  color: hsl(var(--color-med));
+  border: 1px solid hsla(var(--color-med), 0.2);
+}
+.badge-baix {
+  background-color: hsl(var(--bg-low));
+  color: hsl(var(--color-low));
+  border: 1px solid hsla(var(--color-low), 0.2);
+}
+
+/* Pestanyes Actives / Inactives */
+.tab-btn {
+  font-family: var(--font-title);
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+.tab-btn.active {
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+}
+
+/* Estils de Botons Premium */
+.btn-primary {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, #6366f1 100%);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 14px 0 rgba(139, 92, 246, 0.35);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px 0 rgba(139, 92, 246, 0.45);
+  filter: brightness(1.05);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, hsl(var(--secondary)) 0%, #3b82f6 100%);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 14px 0 rgba(6, 182, 212, 0.3);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+}
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px 0 rgba(6, 182, 212, 0.4);
+  filter: brightness(1.05);
+}
+
+.btn-outline {
+  border: 1.5px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+body.dark-mode .btn-outline {
+  background: rgba(15, 23, 42, 0.4);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.btn-outline:hover {
+  background: rgba(139, 92, 246, 0.06);
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+}
+
+/* Botons desactivats (disabled) de disseny apagat i coherent */
+button:disabled, label:has(input[type="file"]:disabled) {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  filter: grayscale(0.5) !important;
+}
+
+/* Drag and Drop Visuals */
+.student-card {
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform, opacity;
+}
+.student-card:active {
+  cursor: grabbing;
+}
+.student-card.dragging {
+  opacity: 0.4;
+  transform: scale(0.95);
+  box-shadow: 0 0 0 2px hsl(var(--primary));
+}
+
+.drop-zone {
+  min-height: 120px;
+  border: 2px dashed transparent;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+.drop-zone.drag-over {
+  border-color: hsl(var(--primary));
+  background-color: rgba(139, 92, 246, 0.05);
+  transform: scale(1.01);
+}
+
+/* Animacions visuals d'entrada per als alumnes i grups (UX Wow) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-group {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Delays per a efecte escalonat en cascada */
+.delay-0 { animation-delay: 0ms; }
+.delay-1 { animation-delay: 50ms; }
+.delay-2 { animation-delay: 100ms; }
+.delay-3 { animation-delay: 150ms; }
+.delay-4 { animation-delay: 200ms; }
+.delay-5 { animation-delay: 250ms; }
+.delay-6 { animation-delay: 300ms; }
+.delay-7 { animation-delay: 350ms; }
+.delay-8 { animation-delay: 400ms; }
+
+/* Estil personalitzat d'inputs i selectors */
+input[type="number"], select, textarea {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-glass);
+  border-radius: 0.5rem;
+  padding: 0.625rem;
+  font-family: var(--font-body);
+  transition: all 0.2s ease;
+}
+input[type="number"]:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+/* Personalització del scroll */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-glass);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ca" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplecs - Creador de Grups Intel·ligent</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          backdropBlur: {
+            xs: '2px',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Estils Personalitzats Premium -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="h-full antialiased transition-colors duration-300">
+  <!-- Fons amb gradients i orbes flotants -->
+  <div class="gradient-bg">
+    <div class="gradient-orb-1"></div>
+    <div class="gradient-orb-2"></div>
+  </div>
+
+  <div class="min-h-screen flex flex-col">
+    <!-- Navbar / Capçalera Premium -->
+    <header class="glass-panel mx-4 mt-4 mb-6 px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <!-- Icona Antigravetat Flotant (SVG animat) -->
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg transform hover:rotate-12 transition-transform duration-300">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19V5m0 0L7 10m5-5l5 5"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl text-slate-800 dark:text-white font-extrabold tracking-tight">
+            Aplecs • <span class="bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent">Creador de grups</span>
+          </h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Eina educativa per a la creació intel·ligent de grups d'alumnes</p>
+        </div>
+      </div>
+
+      <!-- Controls generals superior: Canvi Mode Fosc i Pestanyes -->
+      <div class="flex items-center gap-4">
+        <!-- Commutador Mode Fosc/Clar -->
+        <button id="theme-toggle" class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-850 transition-colors shadow-sm" title="Canvia el mode visual">
+          <!-- Icona Sol -->
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.46 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          <!-- Icona Lluna -->
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        </button>
+
+        <!-- Selector de Pestanyes Principal -->
+        <nav class="flex bg-slate-100 dark:bg-slate-900/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+          <button id="tab-quick" class="tab-btn active px-4 py-2 text-sm rounded-lg text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition-all">
+            ⚡ Mode Ràpid
+          </button>
+          <button id="tab-advanced" class="tab-btn px-4 py-2 text-sm rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+            🛠️ Mode Avançat
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 pb-12">
+      <!-- Contingut Principal dividit per Columnes: Esquerra Config, Dreta Resultats -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- ==========================================
+             COLUMNA ESQUERRA: CONFIGURACIÓ I DADES
+             ========================================== -->
+        <section class="lg:col-span-4 flex flex-col gap-6">
+          
+          <!-- PANELL 1: MODE RÀPID -->
+          <div id="quick-panel" class="glass-panel p-6 flex flex-col gap-5">
+            <h2 class="text-lg text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-2">
+              <span>⚡</span> Mode Ràpid de Grups
+            </h2>
+            
+            <!-- Pas 1: Pujar alumnes -->
+            <div class="flex flex-col gap-2">
+              <div class="flex justify-between items-center">
+                <label for="student-names" class="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  Pas 1: Enganxa la llista d'alumnes
+                </label>
+                <button id="btn-load-demo" class="text-xs text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-300 underline font-medium">
+                  Carrega un exemple
+                </button>
+              </div>
+              <textarea id="student-names" rows="8" class="w-full text-sm font-mono placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="Escriu o enganxa un alumne per línia&#10;Exemple:&#10;Joan Mas&#10;Maria Sastre&#10;Pere Torrent..."></textarea>
+              <div class="text-xs text-slate-400 dark:text-slate-500 flex justify-between">
+                <span>Un alumne per línia</span>
+                <span id="student-counter">0 alumnes detectats</span>
+              </div>
+            </div>
+
+            <!-- Pas 2: Configuració de grups -->
+            <div class="flex flex-col gap-4 border-t border-slate-100 dark:border-slate-800 pt-4">
+              <h3 class="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                Pas 2: Com vols repartir-los?
+              </h3>
+              
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                  <label for="input-group-count" class="text-xs font-medium text-slate-500 dark:text-slate-400">
+                    Nombre de grups
+                  </label>
+                  <input type="number" id="input-group-count" min="1" max="100" class="w-full text-center font-bold" value="4">
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="input-group-size" class="text-xs font-medium text-slate-500 dark:text-slate-400">
+                    Alumnes per grup
+                  </label>
+                  <input type="number" id="input-group-size" min="1" max="100" class="w-full text-center font-bold" placeholder="-">
+                </div>
+              </div>
+              <p class="text-xxs text-slate-400 dark:text-slate-500 italic">
+                * Pots omplir un dels dos valors i l'altre es calcularà automàticament segons els alumnes introduïts.
+              </p>
+            </div>
+
+            <!-- Botons Clau del Mode Ràpid -->
+            <div class="flex flex-col gap-3 border-t border-slate-100 dark:border-slate-800 pt-4">
+              <button id="btn-quick-random" class="btn-primary py-3 px-4 rounded-xl text-center flex items-center justify-center gap-2">
+                🎲 Generar Grups a l'Atzar
+              </button>
+              
+              <div class="grid grid-cols-2 gap-3">
+                <button id="btn-quick-reshuffle" class="btn-outline py-2.5 px-3 rounded-xl text-xs text-center flex items-center justify-center gap-1.5" disabled>
+                  🔄 Tornar a Barrejar
+                </button>
+                
+                <button id="btn-quick-smart" class="btn-secondary py-2.5 px-3 rounded-xl text-xs text-center flex items-center justify-center gap-1.5" title="Evita que els alumnes tornin a treballar amb les mateixes persones d'anteriors grups de la sessió">
+                  🧠 Barrejar sense Repetir Companys
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANELL 2: MODE AVANÇAT -->
+          <div id="advanced-panel" class="glass-panel p-6 flex flex-col gap-5 hidden">
+            <div class="flex justify-between items-center">
+              <h2 class="text-lg text-violet-600 dark:text-violet-400 font-bold flex items-center gap-2">
+                <span>🛠️</span> Mode Avançat (Projectes)
+              </h2>
+              <button id="btn-sync-quick-students" class="text-xs bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 py-1.5 px-2.5 rounded-lg font-semibold hover:bg-indigo-100 transition-colors border border-indigo-100 dark:border-indigo-900">
+                🔄 Sincronitzar Llista
+              </button>
+            </div>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Configura el rendiment acadèmic de cada alumne i defineix incompatibilitats (alumnes que no poden anar junts). L'algorisme equilibrarà els equips i respectarà les restriccions.
+            </p>
+
+            <!-- Llista interactiva d'alumnes amb atributs -->
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                Atributs dels alumnes
+              </label>
+              
+              <div id="adv-student-list-container" class="max-h-72 overflow-y-auto border border-slate-150 dark:border-slate-800 rounded-lg p-2 bg-slate-50/50 dark:bg-slate-900/30 flex flex-col gap-2">
+                <!-- S'omplirà dinàmicament en JS -->
+                <p class="text-xs text-center py-6 text-slate-400 italic">Introdueix primer els noms dels alumnes al Mode Ràpid.</p>
+              </div>
+            </div>
+
+            <!-- Paràmetres del Mode Avançat -->
+            <div class="flex flex-col gap-3 border-t border-slate-100 dark:border-slate-800 pt-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1">
+                  <label for="adv-group-count" class="text-xs font-semibold text-slate-500">Nombre de grups</label>
+                  <input type="number" id="adv-group-count" min="1" max="100" class="w-full text-center font-bold" value="4">
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-semibold text-slate-500">Restriccions actives</label>
+                  <div class="flex items-center h-full pt-1">
+                    <span id="badge-total-constraints" class="bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 px-3 py-1.5 rounded-lg text-xs font-bold border border-amber-200 dark:border-amber-900">
+                      0 Restriccions
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button id="btn-generate-advanced" class="btn-primary py-3 px-4 rounded-xl text-center flex items-center justify-center gap-2 mt-2">
+              🧠 Generar Grups Avançats
+            </button>
+          </div>
+
+          <!-- PANELL 3: GESTIÓ DE DADES -->
+          <div class="glass-panel p-5 flex flex-col gap-4">
+            <h3 class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+              <span>💾</span> Gestió de dades
+            </h3>
+            
+            <div class="flex flex-col gap-2.5">
+              <!-- Exportar i Importar Estat .json -->
+              <div class="grid grid-cols-2 gap-2">
+                <button id="btn-export-project" class="btn-outline py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5" title="Baixa un fitxer amb tot l'estat del projecte">
+                  📥 Exportar Projecte (.json)
+                </button>
+                
+                <label for="import-project-file" class="btn-outline py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer text-center">
+                  📤 Importar Projecte
+                  <input type="file" id="import-project-file" class="hidden" accept=".json">
+                </label>
+              </div>
+
+              <!-- Descarregar Graella de Grups .csv -->
+              <button id="btn-download-csv" class="btn-outline py-2 px-4 rounded-lg text-xs flex items-center justify-center gap-2 w-full" disabled title="Cal generar grups primer per poder exportar-los a taula">
+                📊 Descarregar Graella de Grups (.csv / Excel)
+              </button>
+            </div>
+          </div>
+          
+        </section>
+
+        <!-- ==========================================
+             COLUMNA DRETA: RESULTAT DELS GRUPS (UX WOW)
+             ========================================== -->
+        <section class="lg:col-span-8 glass-panel p-6 min-h-[500px] flex flex-col gap-6">
+          
+          <!-- Capçalera del panell de grups -->
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+            <div>
+              <h2 class="text-xl text-slate-800 dark:text-white font-extrabold flex items-center gap-2">
+                👥 Graella de Grups Resultants
+              </h2>
+              <p id="groups-subtitle" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Els grups generats es mostraran aquí a sota. Podràs reordenar-los arrossegant els alumnes.
+              </p>
+            </div>
+
+            <!-- Estadístiques ràpides -->
+            <div class="flex flex-wrap gap-2">
+              <span id="stat-total-students" class="bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900 px-2.5 py-1 rounded-md text-xs font-medium">
+                Alumnes: 0
+              </span>
+              <span id="stat-total-groups" class="bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border border-cyan-100 dark:border-cyan-900 px-2.5 py-1 rounded-md text-xs font-medium">
+                Grups: 0
+              </span>
+              <span id="stat-conflict-count" class="hidden bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-100 dark:border-rose-900 px-2.5 py-1 rounded-md text-xs font-medium">
+                Conflictes: 0
+              </span>
+            </div>
+          </div>
+
+          <!-- Historial de Sessions i Botó Reiniciar historial de repeticions -->
+          <div id="session-history-widget" class="hidden bg-slate-50 dark:bg-slate-900/40 border border-slate-150 dark:border-slate-800 p-3 rounded-xl flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+            <span class="flex items-center gap-1.5">
+              <span>🧠</span> 
+              <span id="history-text">S'estan registrant els companys de grup per a futures barreges (0 agrupacions memoritzades).</span>
+            </span>
+            <button id="btn-reset-history" class="text-rose-500 hover:text-rose-600 dark:hover:text-rose-400 underline font-semibold ml-2">
+              Neteja historial
+            </button>
+          </div>
+
+          <!-- Zona buida per defecte -->
+          <div id="empty-groups-state" class="flex-grow flex flex-col items-center justify-center text-center p-12 gap-4">
+            <div class="w-20 h-20 rounded-full bg-indigo-50 dark:bg-slate-900 flex items-center justify-center text-indigo-500 dark:text-indigo-400 animate-pulse">
+              <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-slate-700 dark:text-slate-300">Encara no hi ha grups</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+                Escriu els noms dels teus alumnes, selecciona el nombre de grups i clica el botó "Generar Grups" per començar.
+              </p>
+            </div>
+          </div>
+
+          <!-- Requadre d'avís de conflictes no resolts en mode avançat -->
+          <div id="conflict-warning-alert" class="hidden bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-300 p-4 rounded-xl flex items-start gap-3">
+            <svg class="w-5 h-5 text-rose-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+            <div class="text-xs leading-relaxed">
+              <h4 class="font-bold text-sm">Alerta de restriccions incompatibles</h4>
+              <p id="conflict-warning-text" class="mt-1">Hi ha hagut incompatibilitats que no s'han pogut resoldre automàticament (s'indiquen amb una línia vermella o icona de conflicte). Pots ajustar els grups manualment arrossegant els alumnes.</p>
+            </div>
+          </div>
+
+          <!-- Graella de grups activa -->
+          <div id="groups-grid" class="hidden grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- S'omplirà dinàmicament en JS -->
+          </div>
+
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Modal d'incompatibilitats / edició avançada d'un alumne -->
+    <div id="student-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+      <div class="glass-panel w-full max-w-md bg-white dark:bg-slate-900 p-6 flex flex-col gap-5 shadow-2xl relative animate-group">
+        <button id="modal-close-btn" class="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        
+        <div>
+          <h3 id="modal-student-name" class="text-lg font-extrabold text-slate-800 dark:text-white">Editar Alumne</h3>
+          <p class="text-xs text-slate-500">Configura les propietats acadèmiques i les restriccions</p>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <!-- Variable 1: Nivell educatiu -->
+          <div class="flex flex-col gap-1.5">
+            <label for="modal-student-level" class="text-xs font-bold text-slate-600 dark:text-slate-400">Nivell Educatiu / Rendiment</label>
+            <select id="modal-student-level" class="w-full">
+              <option value="high">Alt (Per fer grups equilibrats)</option>
+              <option value="medium" selected>Mitjà (Estàndard)</option>
+              <option value="low">Baix (Recolzament)</option>
+            </select>
+          </div>
+
+          <!-- Variable 2: Incompatibilitats -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-bold text-slate-600 dark:text-slate-400">Incompatibilitats / Restriccions</label>
+            <p class="text-[10px] text-slate-400 leading-tight mb-1">
+              Selecciona els companys amb els quals aquest alumne <strong>NO pot anar</strong> en el mateix grup.
+            </p>
+            <div id="modal-incompatibilities-container" class="max-h-44 overflow-y-auto border border-slate-150 dark:border-slate-800 rounded-lg p-2 bg-slate-50/50 dark:bg-slate-900/30 flex flex-col gap-1.5">
+              <!-- Checkboxes s'ompliran en JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-3 border-t border-slate-100 dark:border-slate-800 pt-4">
+          <button id="modal-save-btn" class="btn-primary py-2 px-4 rounded-lg text-xs">
+            Desar Canvis
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer de Pàgina -->
+    <footer class="mt-auto py-6 border-t border-slate-200/50 dark:border-slate-850/50 text-center text-xs text-slate-400 dark:text-slate-500 flex flex-col items-center justify-center gap-3">
+      <div class="flex items-center gap-2 flex-wrap justify-center">
+        <img src="https://avatars.githubusercontent.com/u/103993233?v=4" alt="Francesc Sala Carbó" class="w-5 h-5 rounded-full border border-slate-200 dark:border-slate-800 shadow-sm">
+        <span>© 2026 Aplecs • Fet per <a href="https://github.com/SirSiscu" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors hover:underline">Francesc Sala Carbó</a> • Creat amb ❤️ per a docents compromesos</span>
+      </div>
+      <div class="flex items-center justify-center mt-0.5">
+        <a href="https://buymeacoffee.com/francescsala" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-[#FFDD00] hover:bg-[#FFEA00] text-black font-bold py-1 px-3 rounded-full text-[10px] shadow-sm hover:shadow-md transition-all duration-200">
+          ☕ Buy me a coffee
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Lògica de l'Aplicació -->
+  <script src="app.js"></script>
+</body>
+</html>
